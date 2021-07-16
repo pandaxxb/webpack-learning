@@ -1,3 +1,5 @@
-import { name } from './b.js';
-import './c.css';
+const name = 'ethan';
 console.log(name);
+debugger;
+const age = 18;
+console.log(age);
