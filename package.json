@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack"
+    "dev": "webpack",
+    "start": "webpack-dev-server --open",
+    "server": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,8 +21,12 @@
   },
   "homepage": "https://github.com/pandaxxb/webpack-learning#readme",
   "devDependencies": {
+    "express": "^4.17.1",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-middleware": "^5.0.0",
+    "webpack-manifest-plugin": "^3.1.1",
+    "webpack-nano": "^1.1.1"
   },
   "dependencies": {
     "@babel/cli": "^7.14.5",
@@ -31,8 +37,11 @@
     "copy-webpack-plugin": "^6.3.2",
     "css-loader": "^3.6.0",
     "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.4.1",
+    "lodash": "^4.17.21",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.1",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "xml-loader": "^1.2.1"
   }
 }

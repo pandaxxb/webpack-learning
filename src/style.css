@@ -1,0 +1,14 @@
+@font-face{
+  font-family: 'dance-font';
+  src: url('./DancingScript-Regular.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+.hello{
+  color: aliceblue;
+  font-family: 'dance-font';
+}
+body{
+  background-color: aquamarine;
+}

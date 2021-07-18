@@ -1,61 +1,48 @@
 const path = require('path');
-const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    app1: './a.js',
-    // app2: './b.js',
+    app: './src/index.js',
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist/'),
+    filename: '[name].[hash:8].js',
+    publicPath: '/',
   },
-  devtool: 'eval-cheap-module-source-map',
-  mode: 'none',
+  devServer: {
+    contentBase: './dist',
+    hot: true,
+  },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        loader: ['style-loader', 'css-loader']
       },
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-            // presets: ['@babel/preset-env']
-          },
-        }
+        test: /\.ttf$/,
+        loader: ['url-loader']
       },
       {
-        test: /\.jpg$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 1024 * 8,
-            name: '[name]-[contenthash:8].[ext]',
-            publicPath: './dist/'
-          }
-        }
+        test: /\.xml$/,
+        loader: 'xml-loader',
       }
     ]
   },
   plugins: [
-    new webpack.HashedModuleIdsPlugin({
-      hashDigestLength: 8
+    new HtmlWebpackPlugin({
+      title: 'Output Management'
     }),
     new CleanWebpackPlugin(),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'images/'),
-          to: path.resolve(__dirname, 'dist/images/'),
-        }
-      ]
-    })
-  ]
-};
+    // new WebpackManifestPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
+  optimization: {
+    chunkIds: 'named',
+  },
+  devtool: 'inline-source-map',
+}
