@@ -11,11 +11,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist/'),
     filename: '[name].[hash:8].js',
-    publicPath: '/',
+    publicPath: './',
   },
   devServer: {
     contentBase: './dist',
-    hot: true,
+    // hot: true,
   },
   module: {
     rules: [
@@ -44,5 +44,9 @@ module.exports = {
   optimization: {
     chunkIds: 'named',
   },
-  devtool: 'inline-source-map',
+  // devtool: 'source-map',
+  mode: 'production',
+  optimization: {
+    usedExports: true,
+  },
 }
